@@ -1,0 +1,16 @@
+version: '2'
+services:
+    feescalculator-mongodb:
+        image: mongo:4.0.2
+        ports:
+            - "27017:27017"
+        command: mongos --configdb feescalculator-mongodb-config
+    feescalculator-mongodb-node:
+        build:
+            context: .
+            dockerfile: mongodb/MongoDB.Dockerfile
+        command: mongod --replSet rs1 --noprealloc --smallfiles
+    feescalculator-mongodb-config:
+        image: mongo:4.0.2
+        container_name: feescalculator-mongodb-config
+        command: mongod --noprealloc --smallfiles --configsvr --dbpath /data/db
