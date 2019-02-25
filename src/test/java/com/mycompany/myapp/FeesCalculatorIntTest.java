@@ -48,52 +48,54 @@ public class FeesCalculatorIntTest {
         this.restFeeCalculatorMockMvc = MockMvcBuilders
             .standaloneSetup(feesCalculatorResource)
             .build();
-        ruleRepository.save(new Rule().name("rule1")
-            .rate(new Rate().percent(8))
-            .restrictions(Collections.singletonList(new MissionDurationRestrictionPredicate().operand("gt").value("2months"))));
-        ruleRepository.save(new Rule().name("rule1.1")
-            .rate(new Rate().percent(8))
-            .restrictions(Collections.singletonList(new MissionDurationRestrictionPredicate().operand("lt").value("2weeks"))));
-        ruleRepository.save(new Rule().name("rule2")
-            .rate(new Rate().percent(8))
-            .restrictions(Arrays.asList(new ClientLocationRestrictionPredicate().country("ES"),
-                new FreelancerLocationRestrictionPredicate().country("ES"))));
-        ruleRepository.save(new Rule().name("rule3")
-            .rate(new Rate().percent(6))
-            .restrictions(Collections.singletonList(new MissionDurationRestrictionPredicate().operand("gt").value("4months"))));
-        ruleRepository.save(new Rule().name("rule4")
-            .rate(new Rate().percent(8))
-            .restrictions(Collections.singletonList(new CommercialRelationDurationRestrictionPredicate().operand("gt").value("2years"))));
-        ruleRepository.save(new Rule().name("rule4.1")
-            .rate(new Rate().percent(8))
-            .restrictions(Collections.singletonList(new CommercialRelationDurationRestrictionPredicate().operand("lt").value("2years"))));
-        ruleRepository.save(new Rule().name("rule5")
-            .rate(new Rate().percent(5))
-            .restrictions(Arrays.asList(new ClientLocationRestrictionPredicate().country("ES"),
-                new FreelancerLocationRestrictionPredicate().country("ES"),
-                new MissionDurationRestrictionPredicate().operand("gt").value("3months"),
-                new CommercialRelationDurationRestrictionPredicate().operand("gt").value("1week"))));
-        ruleRepository.save(new Rule().name("rule6")
-            .rate(new Rate().percent(6))
-            .restrictions(Collections.singletonList(new OrRestrictionPredicate().restrictionPredicates(
-                Arrays.asList(new ClientLocationRestrictionPredicate().country("FR"), new FreelancerLocationRestrictionPredicate().country("FR"))
-            ))));
-        ruleRepository.save(new Rule().name("rule7")
-            .rate(new Rate().percent(5))
-            .restrictions(Arrays.asList(new OrRestrictionPredicate().restrictionPredicates(
-                Arrays.asList(new MissionDurationRestrictionPredicate().operand("gt").value("2months"),
-                    new CommercialRelationDurationRestrictionPredicate().operand("gt").value("2months"))
-            ), new ClientLocationRestrictionPredicate().country("FR"), new FreelancerLocationRestrictionPredicate().country("FR"))));
-        ruleRepository.save(new Rule().name("rule8")
-            .rate(new Rate().percent(4))
-            .restrictions(Arrays.asList(new OrRestrictionPredicate().restrictionPredicates(
-                Arrays.asList(new MissionDurationRestrictionPredicate().operand("lt").value("2months"),
-                    new CommercialRelationDurationRestrictionPredicate().operand("lt").value("2months"),
-                    new OrRestrictionPredicate().restrictionPredicates(Arrays.asList(
-                        new ClientLocationRestrictionPredicate().country("ES"), new FreelancerLocationRestrictionPredicate().country("ES")
-                    ))
-                )
-            ), new ClientLocationRestrictionPredicate().country("DE"))));
+        if (ruleRepository.findAll().isEmpty()) {
+            ruleRepository.save(new Rule().name("rule1")
+                .rate(new Rate().percent(8))
+                .restrictions(Collections.singletonList(new MissionDurationRestrictionPredicate().operand("gt").value("2months"))));
+            ruleRepository.save(new Rule().name("rule1.1")
+                .rate(new Rate().percent(8))
+                .restrictions(Collections.singletonList(new MissionDurationRestrictionPredicate().operand("lt").value("2weeks"))));
+            ruleRepository.save(new Rule().name("rule2")
+                .rate(new Rate().percent(8))
+                .restrictions(Arrays.asList(new ClientLocationRestrictionPredicate().country("ES"),
+                    new FreelancerLocationRestrictionPredicate().country("ES"))));
+            ruleRepository.save(new Rule().name("rule3")
+                .rate(new Rate().percent(6))
+                .restrictions(Collections.singletonList(new MissionDurationRestrictionPredicate().operand("gt").value("4months"))));
+            ruleRepository.save(new Rule().name("rule4")
+                .rate(new Rate().percent(8))
+                .restrictions(Collections.singletonList(new CommercialRelationDurationRestrictionPredicate().operand("gt").value("2years"))));
+            ruleRepository.save(new Rule().name("rule4.1")
+                .rate(new Rate().percent(8))
+                .restrictions(Collections.singletonList(new CommercialRelationDurationRestrictionPredicate().operand("lt").value("2years"))));
+            ruleRepository.save(new Rule().name("rule5")
+                .rate(new Rate().percent(5))
+                .restrictions(Arrays.asList(new ClientLocationRestrictionPredicate().country("ES"),
+                    new FreelancerLocationRestrictionPredicate().country("ES"),
+                    new MissionDurationRestrictionPredicate().operand("gt").value("3months"),
+                    new CommercialRelationDurationRestrictionPredicate().operand("gt").value("1week"))));
+            ruleRepository.save(new Rule().name("rule6")
+                .rate(new Rate().percent(6))
+                .restrictions(Collections.singletonList(new OrRestrictionPredicate().restrictionPredicates(
+                    Arrays.asList(new ClientLocationRestrictionPredicate().country("FR"), new FreelancerLocationRestrictionPredicate().country("FR"))
+                ))));
+            ruleRepository.save(new Rule().name("rule7")
+                .rate(new Rate().percent(5))
+                .restrictions(Arrays.asList(new OrRestrictionPredicate().restrictionPredicates(
+                    Arrays.asList(new MissionDurationRestrictionPredicate().operand("gt").value("2months"),
+                        new CommercialRelationDurationRestrictionPredicate().operand("gt").value("2months"))
+                ), new ClientLocationRestrictionPredicate().country("FR"), new FreelancerLocationRestrictionPredicate().country("FR"))));
+            ruleRepository.save(new Rule().name("rule8")
+                .rate(new Rate().percent(4))
+                .restrictions(Arrays.asList(new OrRestrictionPredicate().restrictionPredicates(
+                    Arrays.asList(new MissionDurationRestrictionPredicate().operand("lt").value("2months"),
+                        new CommercialRelationDurationRestrictionPredicate().operand("lt").value("2months"),
+                        new OrRestrictionPredicate().restrictionPredicates(Arrays.asList(
+                            new ClientLocationRestrictionPredicate().country("ES"), new FreelancerLocationRestrictionPredicate().country("ES")
+                        ))
+                    )
+                ), new ClientLocationRestrictionPredicate().country("DE"))));
+        }
     }
 
     @Test
