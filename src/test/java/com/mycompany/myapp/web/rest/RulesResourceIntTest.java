@@ -42,14 +42,14 @@ public class RulesResourceIntTest {
 
     @Test
     public void retrieveRules() throws Exception {
-        restRulesMockMvc.perform(get("/rules"))
+        restRulesMockMvc.perform(get("/api/rules"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
     }
 
     @Test
     public void createRule_without_correct_sample_should_be_refused() throws Exception {
-        restRulesMockMvc.perform(post("/rules")
+        restRulesMockMvc.perform(post("/api/rules")
             .content("{\"name\":\"test\"}")
             .contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(status().isBadRequest());
@@ -57,7 +57,7 @@ public class RulesResourceIntTest {
 
     @Test
     public void createRule_with_correct_sample_should_be_accepted() throws Exception {
-        restRulesMockMvc.perform(post("/rules")
+        restRulesMockMvc.perform(post("/api/rules")
             .content("{\"name\":\"test\",\"rate\":{\"percent\":\"8\"},\"restrictions\":[{\"mappingInfo\":\"clientLocation\",\"country\":\"ES\"},{\"mappingInfo\":\"freelancerLocation\",\"country\":\"ES\"}]}")
             .contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk())

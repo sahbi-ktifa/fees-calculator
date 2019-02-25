@@ -33,6 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = FeesCalculatorApp.class)
 public class FeesCalculatorIntTest {
 
+    private static final String FEES_ENDPOINT_URL = "/api/fees";
     private MockMvc restFeeCalculatorMockMvc;
 
     @Autowired
@@ -97,7 +98,7 @@ public class FeesCalculatorIntTest {
 
     @Test
     public void calculateFee_should_not_match_any_rules() throws Exception {
-        restFeeCalculatorMockMvc.perform(post("/fees")
+        restFeeCalculatorMockMvc.perform(post(FEES_ENDPOINT_URL)
             .content("{\n" +
                 "\t\"mission\": {\n" +
                 "\t\t\"duration\": \"1month\"\n" +
@@ -112,7 +113,7 @@ public class FeesCalculatorIntTest {
 
     @Test
     public void calculateFee_should_match_rule1() throws Exception {
-        restFeeCalculatorMockMvc.perform(post("/fees")
+        restFeeCalculatorMockMvc.perform(post(FEES_ENDPOINT_URL)
             .content("{\n" +
                 "\t\"client\": {\"ip\": \"21.127.206.227\"},\n" +
                 "\t\"freelancer\": {\"ip\": \"217.127.206.227\"},\n" +
@@ -133,7 +134,7 @@ public class FeesCalculatorIntTest {
 
     @Test
     public void calculateFee_should_match_rule1_1() throws Exception {
-        restFeeCalculatorMockMvc.perform(post("/fees")
+        restFeeCalculatorMockMvc.perform(post(FEES_ENDPOINT_URL)
             .content("{\n" +
                 "\t\"client\": {\"ip\": \"217.127.206.227\"},\n" +
                 "\t\"freelancer\": {\"ip\": \"217.127.206.227\"},\n" +
@@ -154,7 +155,7 @@ public class FeesCalculatorIntTest {
 
     @Test
     public void calculateFee_should_match_rule2() throws Exception {
-        restFeeCalculatorMockMvc.perform(post("/fees")
+        restFeeCalculatorMockMvc.perform(post(FEES_ENDPOINT_URL)
             .content("{\n" +
                 "\t\"client\": {\"ip\": \"217.127.206.227\"},\n" +
                 "\t\"freelancer\": {\"ip\": \"217.127.206.227\"},\n" +
@@ -175,7 +176,7 @@ public class FeesCalculatorIntTest {
 
     @Test
     public void calculateFee_should_match_rule3() throws Exception {
-        restFeeCalculatorMockMvc.perform(post("/fees")
+        restFeeCalculatorMockMvc.perform(post(FEES_ENDPOINT_URL)
             .content("{\n" +
                 "\t\"client\": {\"ip\": \"17.127.206.227\"},\n" +
                 "\t\"freelancer\": {\"ip\": \"247.127.206.227\"},\n" +
@@ -196,7 +197,7 @@ public class FeesCalculatorIntTest {
 
     @Test
     public void calculateFee_should_match_rule4() throws Exception {
-        restFeeCalculatorMockMvc.perform(post("/fees")
+        restFeeCalculatorMockMvc.perform(post(FEES_ENDPOINT_URL)
             .content("{\n" +
                 "\t\"client\": {\"ip\": \"17.127.206.227\"},\n" +
                 "\t\"freelancer\": {\"ip\": \"247.127.206.227\"},\n" +
@@ -217,7 +218,7 @@ public class FeesCalculatorIntTest {
 
     @Test
     public void calculateFee_should_match_rule4_1() throws Exception {
-        restFeeCalculatorMockMvc.perform(post("/fees")
+        restFeeCalculatorMockMvc.perform(post(FEES_ENDPOINT_URL)
             .content("{\n" +
                 "\t\"client\": {\"ip\": \"17.127.206.227\"},\n" +
                 "\t\"freelancer\": {\"ip\": \"247.127.206.227\"},\n" +
@@ -238,7 +239,7 @@ public class FeesCalculatorIntTest {
 
     @Test
     public void calculateFee_should_match_rule5() throws Exception {
-        restFeeCalculatorMockMvc.perform(post("/fees")
+        restFeeCalculatorMockMvc.perform(post(FEES_ENDPOINT_URL)
             .content("{\n" +
                 "\t\"client\": {\"ip\": \"217.127.206.227\"},\n" +
                 "\t\"freelancer\": {\"ip\": \"217.127.206.227\"},\n" +
@@ -259,7 +260,7 @@ public class FeesCalculatorIntTest {
 
     @Test
     public void calculateFee_should_match_rule6_part1() throws Exception {
-        restFeeCalculatorMockMvc.perform(post("/fees")
+        restFeeCalculatorMockMvc.perform(post(FEES_ENDPOINT_URL)
             .content("{\n" +
                 "\t\"client\": {\"ip\": \"92.128.12.12\"},\n" +
                 "\t\"freelancer\": {\"ip\": \"217.127.206.227\"},\n" +
@@ -280,7 +281,7 @@ public class FeesCalculatorIntTest {
 
     @Test
     public void calculateFee_should_match_rule6_part2() throws Exception {
-        restFeeCalculatorMockMvc.perform(post("/fees")
+        restFeeCalculatorMockMvc.perform(post(FEES_ENDPOINT_URL)
             .content("{\n" +
                 "\t\"client\": {\"ip\": \"217.127.206.227\"},\n" +
                 "\t\"freelancer\": {\"ip\": \"92.128.12.12\"},\n" +
@@ -301,7 +302,7 @@ public class FeesCalculatorIntTest {
 
     @Test
     public void calculateFee_should_match_rule7_1() throws Exception {
-        restFeeCalculatorMockMvc.perform(post("/fees")
+        restFeeCalculatorMockMvc.perform(post(FEES_ENDPOINT_URL)
             .content("{\n" +
                 "\t\"client\": {\"ip\": \"92.128.12.12\"},\n" +
                 "\t\"freelancer\": {\"ip\": \"92.128.12.12\"},\n" +
@@ -322,7 +323,7 @@ public class FeesCalculatorIntTest {
 
     @Test
     public void calculateFee_should_match_rule7_2() throws Exception {
-        restFeeCalculatorMockMvc.perform(post("/fees")
+        restFeeCalculatorMockMvc.perform(post(FEES_ENDPOINT_URL)
             .content("{\n" +
                 "\t\"client\": {\"ip\": \"92.128.12.12\"},\n" +
                 "\t\"freelancer\": {\"ip\": \"92.128.12.12\"},\n" +
@@ -339,7 +340,7 @@ public class FeesCalculatorIntTest {
 
     @Test
     public void calculateFee_should_match_rule8() throws Exception {
-        restFeeCalculatorMockMvc.perform(post("/fees")
+        restFeeCalculatorMockMvc.perform(post(FEES_ENDPOINT_URL)
             .content("{\n" +
                 "\t\"client\": {\"ip\": \"2.16.6.30\"},\n" +
                 "\t\"freelancer\": {\"ip\": \"217.127.206.227\"},\n" +
