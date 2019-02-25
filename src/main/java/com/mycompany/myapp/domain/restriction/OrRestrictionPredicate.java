@@ -9,7 +9,7 @@ public class OrRestrictionPredicate extends RestrictionPredicate {
         return restrictionPredicates;
     }
 
-    public OrRestrictionPredicate setRestrictionPredicates(List<RestrictionPredicate> restrictionPredicates) {
+    public OrRestrictionPredicate restrictionPredicates(List<RestrictionPredicate> restrictionPredicates) {
         this.restrictionPredicates = restrictionPredicates;
         return this;
     }
